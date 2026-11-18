@@ -1,4 +1,4 @@
-import { BASE_URL, getData, filterData} from "./api.js";
+import { BASE_URL, getData, rechercheData} from "./api.js";
 import { section_article, afficher, formatNumero, afficher_error} from "./ui.js";
 
 // Afficher creatures
@@ -12,17 +12,25 @@ try {
 }
 
 // filter by type
-try {
-    let filtre=document.getElementById("filters");
+
+    let filtre=document.getElementById("filters")
+    // let fitContent=filtre.textContent.trim()
+    let search=document.getElementById("search")
+     let filterSelected="Tous"
     filtre.addEventListener("click",async(e)=>{
-        if(e.target.tagName==="BUTTON"){
+     if(e.target.tagName==="BUTTON"){
             section_article.innerHTML=`<p class="flex text-3xl justify-center items-center bg-orange-500 text-white"> Chargement...</p>`;
-            console.log("hello")
-            let data =await filterData(e.target.textContent);
-            console.log(data)
+            filterSelected=e.target.textContent
+
+            let serContent=search.textContent
+            let data =await rechercheData(filterSelected,serContent);
             afficher(data);
         }
-    })
-}catch(e){
-    afficher_error()
-}
+    });
+    search.addEventListener("input",async()=>{
+           let serContent=search.value.trim()
+            let data= await rechercheData(filterSelected,serContent)
+             afficher(data);
+        
+        
+    });
