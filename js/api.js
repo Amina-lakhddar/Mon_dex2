@@ -11,15 +11,45 @@ export async function getData() {
 
 };
 
-export async function filterData(type){
-    let url=BASE_URL;
-    if(type!=="Tous"){
-        url+=`?type=${type}`
+// export async function filterData(type){
+//     let url=BASE_URL;
+//     if(type!=="Tous"){
+//         url+=`?type=${type}`
+//     }
+//     let res=await fetch(url);
+//     if(!res.ok){
+//         throw new Error("Erreur de api")
+//     }
+//     let data=await res.json();
+//     return data;
+// }
+
+export async function rechercheData(filter,text){
+     let url = BASE_URL;
+    if(filter==="Tous" && text==="")
+    {
+        return await getData()
     }
-    let res=await fetch(url);
-    if(!res.ok){
-        throw new Error("Erreur de api")
+    if (filter !== "Tous") {
+        url += `?type=${filter}`;
     }
-    let data=await res.json();
-    return data;
+    if(text!=="")
+    {
+        url+= filter !=="Tous"?"&":"?"
+        url+=`name_like=${text}`
+        
+    }
+ 
+  
+
+    let res = await fetch(url);
+
+    if (!res.ok) {
+        throw new Error(`Erreur ${res.status}`);
+    }
+
+    return await res.json();
+   
 }
+
+
