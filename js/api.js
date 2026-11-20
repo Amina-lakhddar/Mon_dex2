@@ -24,23 +24,22 @@ export async function getData() {
 //     return data;
 // }
 
-export async function rechercheData(filter,text){
-     let url = BASE_URL;
-    if(filter==="Tous" && text==="")
-    {
-        return await getData()
+export async function rechercheData(filter, text,order) {
+    let url = BASE_URL;
+    if (filter === "Tous") {
+        url += `?`;
     }
     if (filter !== "Tous") {
         url += `?type=${filter}`;
     }
-    if(text!=="")
-    {
-        url+= filter !=="Tous"?"&":"?"
-        url+=`name_like=${text}`
-        
+    if (text !== "") {
+        url += filter !== "Tous" ? "&" : "?"
+        url += `name_like=${text}`
+
     }
- 
-  
+
+    url += `&_sort=name&_order=${order}`;
+    console.log(url)
 
     let res = await fetch(url);
 
@@ -49,7 +48,7 @@ export async function rechercheData(filter,text){
     }
 
     return await res.json();
-   
+
 }
 
 
