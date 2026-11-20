@@ -49,6 +49,18 @@ export async function rechercheData(filter, text,order) {
 
     return await res.json();
 
-}
+};
+
+export async function afficherDetaill(id){
+ let url=BASE_URL+`/${id}`;
+ let res=await fetch(url);
+
+ if(!res.ok){
+    throw new Error(`Erreur ${res.status}`)
+ }
+ let data=await res.json();
+ return data
+};
+console.log(await afficherDetaill(1))
 
 
