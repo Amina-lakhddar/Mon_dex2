@@ -1,5 +1,9 @@
-import { BASE_URL, getData, rechercheData , afficherDetaill} from "./api.js";
-import { section_article, afficher, formatNumero, afficher_error,detail, panneau_detail} from "./ui.js";
+import { BASE_URL, getData, rechercheData , afficherDetaill, ajouterCreature} from "./api.js";
+import { section_article, afficher, formatNumero, afficher_error,detail, panneau_detail, 
+    formulaire,verifierFormulaire,valider_id,valider_name,valider_stat1,valider_stat2,valider_stat3,
+    valider_image,valider_description,id,nom,stat1,stat2,stat3,image,description
+
+} from "./ui.js";
 import { souvegardeFiltre, lireFiltre } from "./storage.js";
 
 
@@ -68,3 +72,65 @@ section_article.addEventListener('click',async(e)=>{
        panneau_detail.innerHTML="Créature introuvable " 
     }
 })
+
+
+//Validation id :
+
+id.addEventListener("input",function(event){
+    if(event.target.tagName==="INPUT"){
+        valider_id()
+    }
+  
+  });
+  // Validation name :
+
+  nom.addEventListener("input",function(event){
+    if(event.target.tagName==="INPUT"){
+        valider_name()
+    }
+  });
+
+  // Validation statistique 1 :
+  stat1.addEventListener("input",function(event){
+    if(event.target.tagName==="INPUT"){
+        valider_stat1()
+    }
+    
+  });
+
+  // Validation statistique 2 :
+  stat2.addEventListener("input",function(event){
+    if(event.target.tagName==="INPUT"){
+        valider_stat2()
+    }
+  });
+
+  // Validation statistique 3 :
+  stat3.addEventListener("input",function(event){
+    if(event.target.tagName==="INPUT"){
+        valider_stat3();
+    }
+  });
+
+  // Validation image :
+  image.addEventListener("input",function(event){
+    if(event.target.tagName==="INPUT"){
+        valider_image()
+    }
+    
+  });
+
+  // Validation description :
+  description.addEventListener("input",function(event){
+    if(event.target.tagName==="TEXTAREA"){
+        valider_description()
+    }
+  });
+
+
+
+
+formulaire.addEventListener("submit",async function(event){
+    event.preventDefault();
+    verifierFormulaire()
+  })
