@@ -1,3 +1,5 @@
+import { ajouterCreature } from "./api.js";
+
 /** 1 → "#001" */
 export const formatNumero = (id) => "#" + String(id).padStart(3, "0");
 
@@ -71,3 +73,241 @@ export function detail(creature){
       
    
 }
+
+
+// validation des inputs du formulaire :
+export let formulaire=document.querySelector("#creature-form");
+  let regexId=/^\d{3}$/;
+  let regexNom=/^[A-Za-zÀ-ÿ0-9][A-Za-zÀ-ÿ0-9 .'-]{1,29}$/;
+  let regexStats=/^\d{1,3}$/;
+  let regexImage=/^https:\/\/\S+\.(png|jpe?g|webp|gif)$/i;
+  let regexDescription=/^[\s\S]{10,200}$/;
+
+
+export let id=document.getElementById("id");
+export let nom=document.getElementById("name");
+export let stat1=document.getElementById("stat1");
+export let stat2=document.getElementById("stat2");
+export let stat3=document.getElementById("stat3");
+export let image=document.getElementById("image");
+export let description=document.getElementById("description");
+
+
+
+  // valider input id 
+  export function valider_id(){
+    let message=document.getElementById("error-message-id");
+      if(regexId.test(id.value)){
+        id.classList.remove("error");
+        id.classList.add("success");
+         
+        message.textContent = "Numéro valide !";
+
+        message.classList.remove("message-error");
+        message.classList.add("message-success");
+
+        return true;
+
+      }else {
+        id.classList.remove("success");
+        id.classList.add("error");
+
+        message.textContent = "Numéro invalide !";
+
+        message.classList.remove("message-success");
+        message.classList.add("message-error");
+
+        return false
+      }
+  }
+
+
+
+
+export function valider_name(){
+  let message=document.getElementById("error-message-name")
+      if(regexNom.test(nom.value)){
+        nom.classList.add("success");
+        nom.classList.remove("error");
+        message.textContent="Nom Valide !";
+        message.classList.remove("message-error");
+        message.classList.add("message-success");
+        return true;
+      }else{
+        nom.classList.remove("success");
+        nom.classList.add("error");
+
+        message.textContent="Nom Invalide !";
+
+        message.classList.remove("message-success");
+        message.classList.add("message-error");
+
+        return false;
+      }
+};
+
+
+// valider input statistique 1
+export function valider_stat1(){
+  let message=document.getElementById("error-message-stat1")
+  if(regexStats.test(stat1.value)){
+    stat1.classList.add("success");
+    stat1.classList.remove("error");
+
+    message.textContent="Statistique valide !";
+
+    message.classList.add("message-success");
+    message.classList.remove("message-error");
+    return true;
+  }else{
+    stat1.classList.remove("success");
+    stat1.classList.add("error");
+
+    message.textContent="Statistique invalide !";
+
+    message.classList.remove("message-success");
+    message.classList.add("message-error");
+    return false;
+  }
+};
+
+
+// valider input statistique 2
+export function valider_stat2(){
+  let message=document.getElementById("error-message-stat2");
+      if(regexStats.test(stat2.value)){
+        stat2.classList.add("success");
+        stat2.classList.remove("error");
+      
+        message.textContent="Statistique valide !";
+
+        message.classList.add("message-success");
+        message.classList.remove("message-error");
+        return true;
+      }else{
+        stat2.classList.remove("success");
+        stat2.classList.add("error");
+
+        message.textContent="Statistique invalide !";
+
+        message.classList.remove("message-success");
+        message.classList.add("message-error");
+        return false;
+      }
+};
+
+
+
+//valider input statistique 3
+export function valider_stat3(){
+  let message=document.getElementById("error-message-stat3")
+    
+      if(regexStats.test(stat3.value)){
+        stat3.classList.add("success");
+        stat3.classList.remove("error");
+
+        message.textContent="Statistique valide !";
+
+        message.classList.add("message-success");
+        message.classList.remove("message-error");
+
+        return true;
+      }else{
+        stat3.classList.remove("success");
+        stat3.classList.add("error");
+
+        message.textContent="Statistique invalide !";
+
+        message.classList.remove("message-success");
+        message.classList.add("message-error");
+
+        return false ;
+      }
+};
+
+
+
+// valider input image 
+export function valider_image(){
+  let message=document.getElementById("error-message-image")
+      if(regexImage.test(image.value)){
+        image.classList.add("success");
+        image.classList.remove("error");
+
+        message.textContent="Image valide !";
+
+        message.classList.add("message-success");
+        message.classList.remove("message-error");
+
+        return true;
+      }else{
+        image.classList.remove("success");
+        image.classList.add("error");
+
+        message.textContent="Image invalide !";
+
+        message.classList.remove("message-success");
+        message.classList.add("message-error");
+
+        return false;
+      }
+};
+
+
+
+// valider input description
+
+export function valider_description(){
+  let message=document.getElementById("error-message-description");
+      if(regexDescription.test(description.value)){
+        description.classList.add("success");
+        description.classList.remove("error");
+
+        message.textContent="Description valide !";
+
+        message.classList.add("message-success");
+        message.classList.remove("message-error");
+
+        return true;
+      }else{
+        description.classList.remove("success");
+        description.classList.add("error");
+
+        message.textContent="Description invalide !";
+
+        message.classList.remove("message-success");
+        message.classList.add("message-error");
+
+        return false;
+      }
+}
+
+// fonction de validation du formulaire 
+export let btn = document.querySelector("#btn");
+
+export function verifierFormulaire() {
+    if (
+        valider_id() && valider_name() && valider_stat1() && valider_stat2() && valider_stat3()
+         && valider_image() && valider_description()
+    ) {
+        
+        
+        let nouvelleCreature = {
+            id: id.value,
+            name: nom.value,
+            type: type.value,
+            level: level.value,
+            stats: {
+                hp: Number(stat1.value),
+                attack: Number(stat2.value),
+                defence: Number(stat3.value)
+            },
+            image: image.value,
+            description: description.value
+        };
+        ajouterCreature(nouvelleCreature)
+    } else {
+        console.log("false")
+    }
+}
+
