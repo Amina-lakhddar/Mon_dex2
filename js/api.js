@@ -6,7 +6,8 @@ export async function getData() {
         throw new Error("Erreur lors de récupération");
     }
     let data = await res.json();
-    return data;
+    // return data;
+    console.log(data)
 
 
 };
@@ -61,6 +62,18 @@ export async function afficherDetaill(id){
  let data=await res.json();
  return data
 };
-console.log(await afficherDetaill(1))
+console.log(await afficherDetaill(1));
+
+
+// foction ajouter un creature 
+export async function ajouterCreature(creature){
+    let res=await fetch(BASE_URL,{
+        method:"POST",
+        headers:{ "Content-Type": "application/json"},
+        body: JSON.stringify(creature),
+    })
+    let data = await res.json();
+    return data;
+}
 
 
