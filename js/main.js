@@ -1,7 +1,8 @@
 import { BASE_URL, getData, rechercheData , afficherDetaill, ajouterCreature} from "./api.js";
 import { section_article, afficher, formatNumero, afficher_error,detail, panneau_detail, 
     formulaire,verifierFormulaire,valider_id,valider_name,valider_stat1,valider_stat2,valider_stat3,
-    valider_image,valider_description,id,nom,stat1,stat2,stat3,image,description
+    valider_image,valider_description,id,nom,stat1,stat2,stat3,image,description,
+    enregistrerBrouillon,afficherBrouillon
 
 } from "./ui.js";
 import { souvegardeFiltre, lireFiltre } from "./storage.js";
@@ -9,7 +10,7 @@ import { souvegardeFiltre, lireFiltre } from "./storage.js";
 
 let btns = document.querySelectorAll(".chip");
 let serContent = "";
-console.log(btns)
+// console.log(btns)
 // Afficher creatures
 let filterSelected;
 try {
@@ -24,6 +25,7 @@ try {
         }
     })
     // afficher(data);r
+    afficherBrouillon();
 } catch (e) {
     afficher_error();
 }
@@ -128,9 +130,13 @@ id.addEventListener("input",function(event){
   });
 
 
-
+let inputs=formulaire.querySelectorAll("input , textarea , select");
+inputs.forEach((input)=>{
+    input.addEventListener("input",enregistrerBrouillon)
+})
 
 formulaire.addEventListener("submit",async function(event){
     event.preventDefault();
-    verifierFormulaire()
+    verifierFormulaire();
+    
   })
