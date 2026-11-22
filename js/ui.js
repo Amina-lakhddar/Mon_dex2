@@ -1,4 +1,5 @@
 import { ajouterCreature } from "./api.js";
+import {supprimerBrouillon , lireBrouillon, souvegardeBrouillon } from "./storage.js";
 
 /** 1 → "#001" */
 export const formatNumero = (id) => "#" + String(id).padStart(3, "0");
@@ -305,9 +306,44 @@ export function verifierFormulaire() {
             image: image.value,
             description: description.value
         };
-        ajouterCreature(nouvelleCreature)
-    } else {
-        console.log("false")
-    }
+        ajouterCreature(nouvelleCreature);
+        supprimerBrouillon();
+        formulaire.reset();
+    } 
+}
+
+
+
+// fonction pour enregistrer le brouillon du formulaire
+export function enregistrerBrouillon(){
+  let brouillon={
+    id:id.value,
+    name:nom.value,
+    type:type.valu,
+    level:level.value,
+    hp:stat1.value,
+    attack:stat2.value,
+    defence:stat3.value,
+    image:image.value,
+    description:description.value
+  };
+  souvegardeBrouillon(brouillon)
+};
+
+
+// fonction pour reafficher les valeurs des input dans le formulaire
+export function afficherBrouillon(){
+  let brouillon=lireBrouillon();
+  if(brouillon){
+    id.value=brouillon.id;
+    nom.value=brouillon.name;
+    type.value=brouillon.type;
+    level.value = brouillon.level;
+    stat1.value = brouillon.hp;
+    stat2.value = brouillon.attack;
+    stat3.value = brouillon.defence;
+    image.value = brouillon.image;
+    description.value = brouillon.description;
+  }
 }
 
