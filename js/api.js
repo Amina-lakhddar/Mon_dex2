@@ -72,6 +72,10 @@ export async function ajouterCreature(creature){
         headers:{ "Content-Type": "application/json"},
         body: JSON.stringify(creature),
     })
+    if(!res.ok){
+        let error=await res.text();
+        throw new Error(error)
+    }
     let data = await res.json();
     return data;
 }
