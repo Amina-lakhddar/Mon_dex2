@@ -32,6 +32,13 @@ export function afficher(creatures){
               data-id="${creature.id}">
               Modifier
           </button>
+          <button
+              type="button"
+              class="btn-outline"
+              data-action="supprimer"
+              data-id="${creature.id}">
+              Supprimer
+          </button>
         </article>`
         
     })
