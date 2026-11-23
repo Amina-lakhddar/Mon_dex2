@@ -1,4 +1,4 @@
-import { ajouterCreature } from "./api.js";
+import { ajouterCreature, modifierCreature } from "./api.js";
 import {supprimerBrouillon , lireBrouillon, souvegardeBrouillon } from "./storage.js";
 
 /** 1 → "#001" */
@@ -24,6 +24,20 @@ export function afficher(creatures){
               data-action="ajouter"
               data-id="${creature.id}">
               Ajouter à l'équipe
+          </button>
+          <button
+              type="button"
+              class="btn-outline"
+              data-action="modifier"
+              data-id="${creature.id}">
+              Modifier
+          </button>
+          <button
+              type="button"
+              class="btn-outline"
+              data-action="supprimer"
+              data-id="${creature.id}">
+              Supprimer
           </button>
         </article>`
         
@@ -92,6 +106,8 @@ export let stat2=document.getElementById("stat2");
 export let stat3=document.getElementById("stat3");
 export let image=document.getElementById("image");
 export let description=document.getElementById("description");
+export let type=document.getElementById("type");
+export let level=document.getElementById("level");
 
 
 
@@ -284,7 +300,8 @@ export function valider_description(){
 }
 
 // fonction de validation du formulaire 
-export let btn = document.querySelector("#btn");
+export let btnSubmit = document.querySelector("#btn");
+let id_creature=null;
 
 export function verifierFormulaire() {
     if (
@@ -306,7 +323,12 @@ export function verifierFormulaire() {
             image: image.value,
             description: description.value
         };
-        ajouterCreature(nouvelleCreature);
+        if(id_creature!==null){
+         modifierCreature(id_creature,nouvelleCreature)
+        }
+        else{
+          ajouterCreature(nouvelleCreature);
+        }
         supprimerBrouillon();
         formulaire.reset();
     } 
@@ -347,3 +369,20 @@ export function afficherBrouillon(){
   }
 }
 
+// fonction remplir le formulaire pour modifier une creature
+export function remplirFormulaire(creature){
+  id_creature=creature.id;
+
+
+  id.value=creature.id;
+  nom.value=creature.name;
+  type.value=creature.type;
+  level.value = creature.level;
+  stat1.value = creature.stats.hp;
+  stat2.value = creature.stats.attack;
+  stat3.value = creature.stats.defence;
+  image.value = creature.image;
+  description.value = creature.description;
+
+  btnSubmit.textContent="Modifier";
+}
