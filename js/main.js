@@ -1,4 +1,4 @@
-import { BASE_URL, getData, rechercheData , getCreature, ajouterCreature} from "./api.js";
+import { BASE_URL, getData, rechercheData , getCreature, ajouterCreature, supprimerCreature} from "./api.js";
 import { section_article, afficher, formatNumero, afficher_error,detail, panneau_detail, 
     formulaire,verifierFormulaire,valider_id,valider_name,valider_stat1,valider_stat2,valider_stat3,
     valider_image,valider_description,id,nom,stat1,stat2,stat3,image,description,
@@ -148,8 +148,16 @@ formulaire.addEventListener("submit",async function(event){
         let id=e.target.dataset.id;
         // console.log(id)
         let creature=await getCreature(id);
-        console.log(creature)
+        // console.log(creature)
         remplirFormulaire(creature)
+    }
+    if(e.target.dataset.action==="supprimer"){
+        let id=e.target.dataset.id;
+        let creature=await getCreature(id);
+        let confiramtion=confirm(`Voulez-vous vraiment supprimer ${creature.name} ?`);
+        if(confiramtion){
+            supprimerCreature(id)
+        }
     }
   })
 
