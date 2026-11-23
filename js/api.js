@@ -114,3 +114,20 @@ export async function ajouterCreature(creature){
 
 // // console.log(await data)
 
+
+
+// fonction pour supprimer un creature avec son id
+
+export async function supprimerCreature(id){
+    let res=await fetch(`${BASE_URL}/${id}`,{
+        method:"DELETE"
+    });
+    
+    if(!res.ok){
+        throw new Error("Erreur lors de suppression")
+    }
+    return true
+}
+
+// await supprimerCreature(13)
+
