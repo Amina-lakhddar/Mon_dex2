@@ -1,48 +1,98 @@
-# Mon Dex — dépôt de départ
 
-Sprint 2 — Brief 1. Une page Tailwind **statique** à rendre interactive avec JavaScript, pour l'univers de  Pokémon.
+#  Mon Dex — Pokédex interactif
 
-## Installation
+##  Présentation
 
-Prérequis : [Node.js](https://nodejs.org) (version 18 ou plus).
+**Mon Dex** est une application web interactive inspirée de l'univers Pokémon. Elle permet de consulter, rechercher, filtrer et gérer une collection de créatures à travers une interface simple et intuitive.
+
+Ce projet a été réalisé dans le cadre de ma formation en développement web à YouCode.
+
+##  Fonctionnalités
+
+###  Gestion des créatures (CRUD)
+- Afficher la liste des créatures depuis une API REST.
+- Ajouter une nouvelle créature.
+- Modifier les informations d'une créature.
+- Supprimer une créature.
+- Consulter les détails et les statistiques de chaque créature.
+
+###  Recherche et filtrage
+- Rechercher une créature par son nom.
+- Filtrer les créatures selon leur type.
+- Trier les créatures selon différents critères.
+
+###  Validation des formulaires
+- Validation des champs avec les expressions régulières (Regex).
+- Vérification des données avant leur envoi.
+- Gestion des messages de succès et d'erreur.
+- Désactivation du bouton pendant l'envoi des données.
+
+###  Gestion des données
+- Communication avec l'API REST à l'aide de Fetch API.
+- Utilisation de JSON Server pour simuler un serveur backend.
+- Utilisation de SessionStorage pour conserver temporairement les brouillons du formulaire.
+
+##  Technologies utilisées
+
+- **HTML5** : structure de l'application.
+- **Tailwind CSS** : mise en forme et design responsive.
+- **JavaScript (ES6+)** : logique et interactivité.
+- **Fetch API** : communication avec l'API REST.
+- **JSON Server** : gestion des données.
+- **SessionStorage** : sauvegarde temporaire des brouillons.
+
+##  Installation et lancement
+
+### 1. Cloner le repository
+
+```bash
+git clone https://github.com/Amina-lakhddar/Mon_dex2.git
+```
+
+### 2. Accéder au dossier
+
+```bash
+cd Mon_dex2
+```
+
+### 3. Installer les dépendances
 
 ```bash
 npm install
-npm run dev
 ```
 
-`npm run dev` surveille vos fichiers et régénère `dist/output.css` à chaque modification. Ouvrez ensuite `index.html` dans votre navigateur (ou avec l'extension Live Server).
-
-Avant de mettre en ligne sur GitHub Pages :
+### 4. Lancer le serveur JSON
 
 ```bash
-npm run build
+npm run api
 ```
 
-Puis committez `dist/output.css` : GitHub Pages ne lance pas Tailwind pour vous.
+L'API sera accessible à l'adresse :
 
-## Contenu du dépôt
+```text
+http://localhost:3000
+```
 
-| Fichier | Rôle |
-| --- | --- |
-| `index.html` | La page Dex, statique, avec 6 cartes écrites à la main |
-| `tailwind.config.js` | Le thème neutre à remplacer par celui de votre univers |
-| `src/input.css` | Les directives Tailwind et quelques classes de composants |
-| `dist/output.css` | Le CSS généré par Tailwind (ne pas modifier à la main) |
-| `data.js` | Le tableau `creatures`, à remplir avec au moins 12 créatures |
-| `script.js` | Votre JavaScript, avec la liste des fonctionnalités à coder |
-| `design/` | La maquette de la version finale |
+### 5. Lancer l'application
 
-## À compléter par vous
+Ouvrir le fichier `index.html` avec Live Server dans Visual Studio Code.
 
-- **Univers choisi :** Pokémon
-- **Lien GitHub Pages :** https://amina-lakhddar.github.io/Mon_Dex/
-- **Sources des images :** https://www.pokebip.com/pokedex
-- **Tests des expressions régulières :** 
-- Valide : 
-    regexId.test("#001") 
-    regexNom.test("Amina") 
-- Invalide :
-    regexId.test("1234")
-    regexNom.test("a")
-- **Bonus réalisés :** [liste]
+##  Objectifs pédagogiques
+
+- Manipuler le DOM et gérer les événements.
+- Utiliser les méthodes JavaScript sur les tableaux et les objets.
+- Organiser le code avec les modules JavaScript.
+- Effectuer des opérations CRUD avec une API REST.
+- Valider les formulaires avec Regex.
+- Gérer les données avec SessionStorage.
+- Implémenter la recherche, le filtrage et le tri.
+
+##  Réalisé par
+
+**Amina Lakhddar**
+
+- GitHub : [Amina-lakhddar](https://github.com/Amina-lakhddar)
+
+---
+
+*Projet réalisé dans le cadre de ma formation en développement web à YouCode.*
